@@ -1,4 +1,4 @@
-# Blog Application
+# Blog Application REST API
 This is a blog application that allows users to create, read, update, and delete blog posts. It also allows users to create, read, update, and delete comments on blog posts.
 
 ## Project Features
@@ -47,3 +47,4 @@ This application uses the Three-Tier Architecture. The presentation layer, busin
 ```
 
 ## HTTP Request Flow
+![diagram](https://github.com/onsever/spring-boot-blog-rest-api/blob/main/Flow%20Diagram.png)
