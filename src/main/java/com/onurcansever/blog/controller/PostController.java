@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,6 +23,7 @@ public class PostController {
     }
 
     // Create a new blog post
+    @PreAuthorize("hasRole('ADMIN')") // Only ADMIN can create a new post.
     @PostMapping
     public ResponseEntity<PostDto> createPost(@Valid @RequestBody PostDto postDto) {
         return new ResponseEntity<>(this.postService.createPost(postDto), HttpStatus.CREATED);
@@ -45,12 +47,14 @@ public class PostController {
     }
 
     // Update a blog post by id
+    @PreAuthorize("hasRole('ADMIN')") // Only ADMIN can update a post.
     @PutMapping("/{id}")
     public ResponseEntity<PostDto> updatePost(@Valid @RequestBody PostDto postDto, @PathVariable(name = "id") Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(this.postService.updatePost(postDto, id));
     }
 
     // Delete a blog post by id
+    @PreAuthorize("hasRole('ADMIN')") // Only ADMIN can delete a post.
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePostById(@PathVariable Long id) {
         this.postService.deletePostById(id);
