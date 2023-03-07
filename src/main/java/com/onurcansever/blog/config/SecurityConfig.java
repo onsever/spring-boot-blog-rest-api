@@ -50,9 +50,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authorize) ->
                         // Allow all the users to access the API with GET endpoints.
                         authorize.requestMatchers(HttpMethod.GET, "/api/**").permitAll()
+                                .requestMatchers("/api/auth/**").permitAll()
                                 .anyRequest().authenticated()
-                )
-                .httpBasic(Customizer.withDefaults());
+                );
 
         return http.build();
     }
